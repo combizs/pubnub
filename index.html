@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>Simple Pubnub Hello World! Demo</title>
+  <script src='http://cdn.pubnub.com/pubnub-3.5.1.min.js'></script>
+  <script>
+    (function(){
+
+      // initializes pubnub keys
+      var pubnub = PUBNUB.init({
+        publish_key: 'demo',
+        subscribe_key: 'demo'
+      });
+
+      // function that listens to the 'hello_world' channel while subscribed & alerts message pased in from publish function
+      pubnub.subscribe({
+        channel: 'hello_world',
+        message: function(m) { alert(m) },
+        connect: publish 
+      });
+
+      // function that sends a message via channel to user who is subscribed to that channel.
+      function publish() {
+        pubnub.publish({
+          channel: 'hello_world',
+          message: 'welcome to a simple pubnub example!'
+        })
+      }
+    })()
+  </script>
+</head>
+<body>
+
+</body>
+</html>
